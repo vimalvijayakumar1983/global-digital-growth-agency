@@ -31,6 +31,9 @@ type IndustryDetail = {
   dashboard: string[];
 };
 
+type PlatformPlay = { platform: string; role: string; execution: string; metrics: string };
+
+
 const details: Record<string, IndustryDetail> = {
   "real-estate-digital-marketing": {
     promise: "Turn property interest into qualified enquiries, site visits and broker-ready conversations.",
@@ -194,6 +197,102 @@ const details: Record<string, IndustryDetail> = {
   },
 };
 
+
+function getPlatformPlaybook(title: string, slug: string): PlatformPlay[] {
+  const playbooks: Record<string, PlatformPlay[]> = {
+    "real-estate-digital-marketing": [
+      { platform: "Google", role: "Capture buyers already searching for communities, developers, payment plans and property types.", execution: "Build tightly segmented search campaigns for project, location, investment and competitor intent. Each ad group lands on a matching project page with budget filters, brochure download and WhatsApp/site-visit CTA.", metrics: "Qualified enquiries, site visit requests, CPL by project, search term quality" },
+      { platform: "Meta", role: "Create lifestyle demand and retarget people who engaged with project visuals.", execution: "Run Reels, carousels and lead ads showing location, amenities, payment plan and investment logic. Retarget video viewers, page visitors and brochure downloaders with urgency and proof.", metrics: "Lead quality, cost per qualified lead, creative engagement, retargeting conversion" },
+      { platform: "TikTok", role: "Make location and project stories feel discoverable, human and memorable.", execution: "Use short video tours, 'why this location' clips, price/payment explainers and broker-led walkthroughs to build awareness before retargeting on Meta and Google.", metrics: "Video watch rate, engaged audiences, landing-page visits, assisted enquiries" },
+      { platform: "LinkedIn", role: "Reach investors, HNW professionals, relocation audiences and B2B referral partners.", execution: "Promote investment briefs, market updates, corporate relocation angles and developer credibility content to decision-makers and expat audiences.", metrics: "Investor leads, content engagement, referral conversations, cost per senior enquiry" },
+    ],
+    "healthcare-clinic-marketing": [
+      { platform: "Google", role: "Capture high-intent patients searching for treatments, doctors, clinics and nearby appointments.", execution: "Create service-specific search campaigns with call extensions, location extensions, appointment landing pages, negative keywords and conversion tracking for calls/forms.", metrics: "Booked appointments, calls, cost per appointment, local search visibility" },
+      { platform: "Meta", role: "Educate patients and build trust before they book.", execution: "Run awareness and retargeting around doctor credibility, treatment explainers, patient FAQs, clinic facilities and offer-led appointment journeys where compliant.", metrics: "Appointment leads, engagement quality, retargeting conversion, enquiry cost" },
+      { platform: "TikTok", role: "Humanize the clinic with simple, educational short-form content.", execution: "Publish doctor explainers, myth-busting clips, recovery guidance and behind-the-scenes content that moves viewers into retargeting audiences.", metrics: "Video completion, profile visits, retargeting pool growth, assisted bookings" },
+      { platform: "LinkedIn", role: "Support premium healthcare brands, corporate wellness, B2B healthcare and specialist authority.", execution: "Use expert articles, doctor leadership content and corporate package messaging for HR, employers and insurance-related audiences.", metrics: "Corporate enquiries, authority engagement, referral leads, qualified consultations" },
+    ],
+    "ecommerce-growth-agency": [
+      { platform: "Google", role: "Capture product demand and protect profitable shopping visibility.", execution: "Optimize product feeds, Shopping/PMax structure, branded/non-branded search, collection SEO and landing pages for high-margin products.", metrics: "ROAS, MER, product revenue, conversion rate, wasted spend" },
+      { platform: "Meta", role: "Scale product discovery and retarget visitors with stronger offers.", execution: "Test UGC-style creatives, product demos, bundles, catalog ads, retargeting and lookalike audiences connected to clean pixel/CAPI events.", metrics: "ROAS, CPA, AOV, add-to-cart rate, creative fatigue" },
+      { platform: "TikTok", role: "Create demand through fast product education and creator-style proof.", execution: "Run hook testing, demonstrations, problem-solution videos, Spark Ads and trend-adapted product storytelling for top SKUs.", metrics: "Thumb-stop rate, CTR, CPA, engaged views, new customer revenue" },
+      { platform: "LinkedIn", role: "Useful for B2B ecommerce, wholesale, distributors, enterprise buyers or premium founder-led brands.", execution: "Promote category authority, wholesale programs, brand story and partnership pages to buyers, retailers and corporate gifting audiences.", metrics: "B2B leads, wholesale enquiries, partner pipeline, content engagement" },
+    ],
+    "restaurant-hospitality-marketing": [
+      { platform: "Google", role: "Win local intent when guests search for restaurants, hotels, brunches, venues and bookings nearby.", execution: "Optimize Google Business Profile, local SEO, search ads, map actions and booking pages around location, cuisine, room packages and events.", metrics: "Calls, bookings, map views, direction requests, cost per booking" },
+      { platform: "Meta", role: "Turn ambience, food, rooms and events into desire and reservations.", execution: "Run Reels, carousels, event ads, offer campaigns and retargeting for menu viewers, website visitors and engaged Instagram audiences.", metrics: "Bookings, engagement, event enquiries, retargeting conversion" },
+      { platform: "TikTok", role: "Make experiences feel shareable and current.", execution: "Use food reveals, room tours, staff moments, guest experiences, weekend plans and venue transformations to drive discovery.", metrics: "Video views, saves, profile visits, booking clicks, local reach" },
+      { platform: "LinkedIn", role: "Reach corporate event planners, travel partners, HR teams and business diners.", execution: "Promote corporate packages, meeting venues, catering, business lunch offers and hospitality partnership content.", metrics: "Corporate enquiries, event leads, partnership messages, package downloads" },
+    ],
+    "automotive-digital-marketing": [
+      { platform: "Google", role: "Capture model, service, repair, parts and dealership search intent.", execution: "Build campaigns by model/service category with call tracking, location extensions, inventory pages and service-booking landing pages.", metrics: "Test drives, service bookings, quote requests, CPL, showroom intent" },
+      { platform: "Meta", role: "Create desire around models, offers, service packages and ownership confidence.", execution: "Use carousels, video walkarounds, lead ads, offer retargeting and lookalike audiences based on test-drive or service customers.", metrics: "Lead quality, cost per booking, creative engagement, retargeting conversion" },
+      { platform: "TikTok", role: "Make vehicle features, comparisons and service expertise easy to consume.", execution: "Publish walkarounds, before/after service clips, EV explainers, finance tips and workshop credibility content.", metrics: "Video completion, profile visits, assisted enquiries, engaged audiences" },
+      { platform: "LinkedIn", role: "Support fleet, leasing, corporate service contracts and B2B partnerships.", execution: "Promote fleet offers, EV transition content, aftersales programs and corporate mobility solutions to operations and finance leaders.", metrics: "Fleet enquiries, B2B meetings, corporate leads, pipeline value" },
+    ],
+    "logistics-marketing": [
+      { platform: "Google", role: "Capture companies searching for freight, shipping, warehousing, courier and customs solutions.", execution: "Create service, route and industry campaigns landing on RFQ pages with shipment details, coverage proof and qualification fields.", metrics: "RFQs, MQLs, quote rate, cost per qualified enquiry" },
+      { platform: "Meta", role: "Retarget website visitors and build credibility with practical proof.", execution: "Use case-led creatives around coverage, speed, warehousing, last-mile reliability and customer sectors, especially for retargeting.", metrics: "Retargeting leads, landing-page visits, engagement, assisted RFQs" },
+      { platform: "TikTok", role: "Show operational capability visually for awareness and recruitment-adjacent credibility.", execution: "Use warehouse walkthroughs, delivery operations, route explainers and behind-the-scenes logistics process videos.", metrics: "Video engagement, brand recall, website visits, audience growth" },
+      { platform: "LinkedIn", role: "Reach procurement, operations, ecommerce, supply chain and finance decision-makers.", execution: "Run thought leadership, trade-lane guides, 3PL checklists and lead-gen campaigns targeted by industry and job function.", metrics: "MQLs, content downloads, RFQs, pipeline value" },
+    ],
+    "education-marketing": [
+      { platform: "Google", role: "Capture course, university, certification and training demand when intent is highest.", execution: "Build search campaigns by course/intake with landing pages covering curriculum, fees, schedules, outcomes and application CTAs.", metrics: "Course enquiries, applications, CPL, enrollment conversion" },
+      { platform: "Meta", role: "Nurture parents, students and professionals through proof and deadlines.", execution: "Run video, carousel and lead campaigns around student outcomes, campus life, scholarships, open days and application deadlines.", metrics: "Lead quality, application rate, cost per enrolled student, retargeting conversion" },
+      { platform: "TikTok", role: "Reach younger audiences with relatable course and campus storytelling.", execution: "Use student-life clips, career outcome explainers, day-in-the-life videos, course myths and deadline reminders.", metrics: "Video views, profile visits, enquiries, application clicks" },
+      { platform: "LinkedIn", role: "Ideal for executive education, professional certificates and B2B training.", execution: "Promote career transformation, corporate training, alumni outcomes and employer-relevant skill content.", metrics: "Professional leads, corporate training enquiries, content engagement, applications" },
+    ],
+    "retail-fmcg-marketing": [
+      { platform: "Google", role: "Capture product, brand, store and category demand.", execution: "Run search, shopping and store-locator campaigns with product feed hygiene, SEO collection pages and offer landing pages.", metrics: "Sales actions, ROAS, product demand, store locator clicks" },
+      { platform: "Meta", role: "Build reach, recall and social commerce conversion.", execution: "Use product demos, creator assets, catalog ads, offer retargeting and campaign bursts around launches, seasons and retail availability.", metrics: "Reach, engagement, sales actions, CPA, creator performance" },
+      { platform: "TikTok", role: "Make products memorable through culture, use cases and creator-style content.", execution: "Test short hooks, product routines, taste/use moments, comparisons, challenges and Spark Ads for high-potential products.", metrics: "Watch rate, engagement, CTR, new customer demand" },
+      { platform: "LinkedIn", role: "Support distributor, retail partner, corporate gifting and B2B buyer visibility.", execution: "Promote brand story, trade marketing support, category growth and partnership propositions to retail and procurement audiences.", metrics: "Distributor enquiries, partner leads, B2B engagement, pipeline" },
+    ],
+    "manufacturing-marketing": [
+      { platform: "Google", role: "Capture buyers searching for products, specifications, suppliers and RFQs.", execution: "Build product/category SEO and search campaigns with technical landing pages, certification proof and RFQ forms.", metrics: "RFQs, product-page traffic, cost per qualified lead, quote rate" },
+      { platform: "Meta", role: "Useful for retargeting, employer brand and visual proof of factory capability.", execution: "Retarget catalog visitors with capability proof, factory visuals, certifications and application use cases.", metrics: "Retargeting enquiries, engagement, assisted conversions, page depth" },
+      { platform: "TikTok", role: "Show production capability, quality processes and scale in a visual way.", execution: "Use process videos, machine/factory clips, quality checks, product transformations and behind-the-scenes manufacturing stories.", metrics: "Video views, profile visits, brand recall, website visits" },
+      { platform: "LinkedIn", role: "Reach procurement, engineering, distributors and industrial decision-makers.", execution: "Promote capability decks, application notes, export propositions and industry-specific product solutions.", metrics: "MQLs, distributor enquiries, RFQs, pipeline value" },
+    ],
+    "professional-services-marketing": [
+      { platform: "Google", role: "Capture high-intent searches for advisory, legal, finance and consultancy problems.", execution: "Build service pages and search campaigns around problem-aware and solution-aware keywords with consultation CTAs.", metrics: "Qualified calls, cost per consultation, ranking growth, lead quality" },
+      { platform: "Meta", role: "Retarget warm visitors and promote trust-building content.", execution: "Use explainer videos, carousel frameworks, lead magnets and retargeting for service-page readers and engaged audiences.", metrics: "Lead magnet downloads, consultation requests, retargeting CPA, engagement" },
+      { platform: "TikTok", role: "Works when experts can simplify complex topics into useful short-form advice.", execution: "Publish myth-busting, common mistakes, quick frameworks and founder/advisor POV clips, then retarget serious viewers.", metrics: "Watch time, saved videos, profile visits, assisted leads" },
+      { platform: "LinkedIn", role: "The core authority and demand channel for most professional services firms.", execution: "Build partner thought leadership, document ads, lead-gen campaigns, webinar funnels and account-based retargeting.", metrics: "Qualified consultations, content leads, senior engagement, pipeline value" },
+    ],
+  };
+
+  return playbooks[slug] ?? [
+    { platform: "Google", role: `Capture high-intent ${title.toLowerCase()} demand.`, execution: "Build search campaigns, SEO pages and conversion landing pages around the highest-value service and buyer intent.", metrics: "Qualified leads, CPL, conversion rate, pipeline" },
+    { platform: "Meta", role: "Create demand and retarget warm audiences.", execution: "Use creative testing, lead forms, landing-page campaigns and retargeting based on engagement depth.", metrics: "Lead quality, creative performance, retargeting conversion" },
+    { platform: "TikTok", role: "Build attention through short-form education and proof.", execution: "Create practical videos, explainers and behind-the-scenes content that feeds retargeting audiences.", metrics: "Watch rate, engagement, website visits" },
+    { platform: "LinkedIn", role: "Reach senior decision-makers and B2B buyers.", execution: "Promote authority content, lead magnets and account-based campaigns to relevant professional audiences.", metrics: "MQLs, meetings, pipeline value" },
+  ];
+}
+
+function VisualStorySection({ title, angles }: { title: string; angles: string[] }) {
+  const cards = [
+    { label: "Hero image direction", text: `Show the real ${title.toLowerCase()} environment: people, product, place, proof and the outcome the buyer wants.`, gradient: "from-cyan-300/25 via-blue-500/10 to-transparent" },
+    { label: "Ad creative board", text: `Turn ${angles.slice(0, 3).join(", ").toLowerCase()} into platform-ready video, carousel and static ad concepts.`, gradient: "from-violet-400/25 via-fuchsia-500/10 to-transparent" },
+    { label: "Landing page proof", text: "Use case sections, process visuals, FAQs, reviews, certifications, dashboards and clear calls-to-action so the prospect feels safe to enquire.", gradient: "from-emerald-300/20 via-cyan-500/10 to-transparent" },
+  ];
+  return (
+    <div className="grid gap-5 lg:grid-cols-3">
+      {cards.map((card) => (
+        <div key={card.label} className="relative min-h-80 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 p-6 shadow-2xl">
+          <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient}`} />
+          <div className="absolute inset-x-6 bottom-6 top-24 rounded-[1.5rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02))] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]" />
+          <div className="relative">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-100">Visual system</p>
+            <h3 className="mt-4 text-2xl font-semibold text-white">{card.label}</h3>
+            <p className="mt-4 text-sm leading-6 text-slate-300">{card.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function DetailSection({ title, items }: { title: string; items: string[] }) {
   return (
     <GlassCard className="h-full">
@@ -304,6 +403,34 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 </div>
               </div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20">
+        <Container>
+          <SectionHeading eyebrow="Platform execution" title="Google, Meta, TikTok and LinkedIn each play a different role." text="The prospect should immediately understand that the agency is not selling generic lead generation. We design each platform around intent, content format, buyer psychology and measurable outcomes." align="center" />
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {getPlatformPlaybook(i.title, i.slug).map((play) => (
+              <GlassCard key={play.platform} className="lg:p-6">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-2xl font-semibold text-white">{play.platform}</h3>
+                  <span className="rounded-full bg-cyan-200/10 px-3 py-1 text-xs font-bold text-cyan-100">Channel role</span>
+                </div>
+                <p className="mt-4 text-sm leading-6 text-cyan-100">{play.role}</p>
+                <p className="mt-4 text-sm leading-6 text-slate-300"><strong className="text-white">Execution:</strong> {play.execution}</p>
+                <p className="mt-4 text-sm leading-6 text-slate-400"><strong className="text-slate-200">Measured by:</strong> {play.metrics}</p>
+              </GlassCard>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="pb-20">
+        <Container>
+          <SectionHeading eyebrow="Images and creative direction" title="The page and campaigns need strong visual proof, not only text." text="These visual blocks guide the kind of imagery, ad concepts and landing-page proof each industry should show so visitors feel the agency understands their world." align="center" />
+          <div className="mt-12">
+            <VisualStorySection title={i.title} angles={d.contentAngles} />
           </div>
         </Container>
       </section>
