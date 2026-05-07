@@ -123,19 +123,43 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-white py-20 text-slate-950">
-        <Container>
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.24em] text-blue-600">Industries</p><h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">Growth plans for the sectors that need serious digital execution.</h2></div>
+      <section className="relative overflow-hidden py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.14),transparent_32rem),radial-gradient(circle_at_85%_10%,rgba(139,92,246,0.16),transparent_30rem)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/40 to-transparent" />
+        <Container className="relative">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-4xl">
+              <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-200">Industries</p>
+              <h2 className="mt-4 text-balance text-4xl font-semibold tracking-[-0.055em] text-white sm:text-6xl">
+                Growth plans for sectors where execution quality decides the winner.
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">
+                Every sector gets its own acquisition logic, funnel architecture, CRM workflow and reporting view — not a generic marketing package.
+              </p>
+            </div>
             <Button href="/industries" className="self-start lg:self-auto">View Industries</Button>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-            {industries.map((industry) => (
-              <Link key={industry.slug} href={`/industries/${industry.slug}`} className="rounded-[1.6rem] border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-1 hover:shadow-xl">
-                <industry.icon className="h-7 w-7 text-blue-600" />
-                <h3 className="mt-4 font-semibold">{industry.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{industry.intro}</p>
-                <p className="mt-4 text-sm font-bold text-blue-700">See Growth Plan →</p>
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+            {industries.map((industry, index) => (
+              <Link
+                key={industry.slug}
+                href={`/industries/${industry.slug}`}
+                className="group relative overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/[0.045] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-200/40 hover:bg-white/[0.075] hover:shadow-[0_24px_80px_rgba(8,47,73,0.35)]"
+              >
+                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-cyan-300/0 blur-2xl transition group-hover:bg-cyan-300/15" />
+                <div className="relative flex h-full min-h-60 flex-col">
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-2xl border border-cyan-200/20 bg-cyan-200/10 text-cyan-100">
+                      <industry.icon className="h-5 w-5" />
+                    </span>
+                    <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-slate-500">{String(index + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold leading-snug text-white">{industry.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-6 text-slate-300">{industry.intro}</p>
+                  <p className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-cyan-200">
+                    See Growth Plan <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
