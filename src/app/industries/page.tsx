@@ -1,0 +1,6 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import { Container, SectionHeading } from "@/components/ui";
+import { industries } from "@/lib/content";
+export const metadata: Metadata = { title: "Industries", description: "Industry-specific digital growth plans for real estate, healthcare, ecommerce, automotive, hospitality, logistics, education, retail, manufacturing and professional services." };
+export default function IndustriesPage(){return <section className="py-20"><Container><SectionHeading eyebrow="Industries" title="Industry-specific growth systems for global businesses." text="Each industry page focuses on pain points, recommended services, sample KPIs and clear conversion paths."/><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{industries.map((i)=><Link key={i.slug} href={`/industries/${i.slug}`} className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 transition hover:-translate-y-1 hover:bg-white/[0.08]"><i.icon className="h-8 w-8 text-cyan-200"/><h2 className="mt-5 text-2xl font-semibold text-white">{i.title}</h2><p className="mt-3 text-sm leading-6 text-slate-300">{i.intro}</p><p className="mt-5 text-sm font-bold text-cyan-200">See Growth Plan →</p></Link>)}</div></Container></section>}

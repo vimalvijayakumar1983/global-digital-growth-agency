@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { Container, GlassCard, SectionHeading } from "@/components/ui";
+export const metadata: Metadata = { title: "Insights", description: "CMS-ready insights and case study structure for digital growth content." };
+const topics = ["How to reduce wasted ad spend", "Why website traffic is not converting", "Google Ads vs Meta Ads", "WhatsApp CRM for lead conversion", "SEO checklist for global businesses", "GA4 metrics every CEO should track"];
+export default function InsightsPage(){return <section className="py-20"><Container><SectionHeading eyebrow="Insights" title="CMS-ready content hub for SEO, case studies and growth guides." text="This page is ready to connect to a CMS for blogs, playbooks, reports and case studies."/><div className="mt-12 grid gap-5 md:grid-cols-3">{topics.map((t)=><GlassCard key={t}><p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">Coming soon</p><h2 className="mt-4 text-xl font-semibold">{t}</h2><p className="mt-3 text-sm leading-6 text-slate-300">A strategic article template with SEO metadata, schema and conversion CTAs.</p></GlassCard>)}</div></Container></section>}

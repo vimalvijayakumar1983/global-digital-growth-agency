@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { Container, LeadForm, SectionHeading, WhatsAppButton } from "@/components/ui";
+export const metadata: Metadata = { title: "Book Consultation", description: "Book a digital growth consultation for strategy, websites, apps, SEO, paid media, CRM, automation and analytics." };
+export default function BookConsultationPage(){return <section className="bg-grid py-20"><Container className="grid gap-10 lg:grid-cols-[0.9fr_1fr]"><div><SectionHeading eyebrow="Consultation" title="Book a growth consultation." text="Use this for a new website, digital marketing strategy, SEO, paid ads, CRM, WhatsApp automation, analytics or full growth audit."/><div className="mt-8"><WhatsAppButton label="Message on WhatsApp"/></div></div><LeadForm title="Book a growth consultation"/></Container></section>}

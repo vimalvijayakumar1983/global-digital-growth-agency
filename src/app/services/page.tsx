@@ -1,0 +1,6 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import { Container, SectionHeading } from "@/components/ui";
+import { services } from "@/lib/content";
+export const metadata: Metadata = { title: "Services", description: "360° digital growth services: strategy, websites, apps, SEO, paid ads, CRM, automation, analytics and AI marketing." };
+export default function ServicesPage() { return <section className="py-20"><Container><SectionHeading eyebrow="Services" title="Everything needed to build, market, automate and measure growth." text="Dedicated service systems for businesses that need one serious partner instead of fragmented vendors." /><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{services.map((s)=><Link key={s.slug} href={`/services/${s.slug}`} className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 transition hover:-translate-y-1 hover:bg-white/[0.08]"><s.icon className="h-8 w-8 text-cyan-200"/><h2 className="mt-5 text-2xl font-semibold text-white">{s.title}</h2><p className="mt-3 text-sm leading-6 text-slate-300">{s.short}</p><p className="mt-5 text-sm font-bold text-cyan-200">Explore Service →</p></Link>)}</div></Container></section> }
